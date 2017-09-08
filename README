@@ -1,0 +1,65 @@
+# UPS-indel
+
+Author: Mohammad Shabbir Hasan
+PhD Student, Department of Computer Science
+Virginia Tech, Blacksburg, VA 24060, USA.
+Email: shabbir5@vt.edu
+===========================================================
+
+## System Requirement
+
+-g++
+	-UPS-indel has been tested with g++ version 4.8.2 in the Ubuntu 14.04 LTS operating system and Mac OS X 10.12.6.
+
+## Compiling
+-UPS-indel requires g++ version 4.7 or above and jdk version 1.8 or above. 
+	- You can check the g++ version using the command: g++ --version
+	- For Mac OSX the g++ that comes with clang is fine although it shows some warning during compilation.
+
+-To compile use the following two commands:
+	make clean
+then
+	make
+
+## Execution of the program
+
+-To run UPS-indel, you need to use the following command:
+	./ups_indel REFERENCE_FILE.fa VCF_FILE.vcf OUTPUT_FILE_NAME -HD_FLAG
+
+	NOTE: 
+		- here REFERENCE_FILE and VCF_FILE must correspond to the same chromosome.
+
+	example:
+		./ups_indel example/ref.fa example/in.vcf example/out -hd=true
+
+	- Here "hd" stands for horizontal decomposition. -hd=true means horizontal decomposition is enabled which is recommended, -hd=false otherwise.
+	
+	A file named out.uvcf will be produced as output file that contains the UPS-Coordinate of each indel.
+
+-To get a list of redundant indels, use the following command:
+	./ups_generate_redundant_indel_list UPS_INDEL_VCF_FILE.UVCF OUTPUT_FILE_NAME
+
+	example:
+		./ups_generate_redundant_indel_list example/out.uvcf example/redundant_indel_list.txt
+
+	A file named redundant_indel_list.txt will be produced that will contain the list of redundant indels.
+
+-To compare two VCF files, first you need to convert them to UVCF files and then use the following command:
+	./ups_compare_uvcf_files FIRST_VCF_FILE.UVCF SECOND_VCF_FILE.UVCF OUTPUT_FILE_NAME
+
+	example:
+		./ups_compare_uvcf_files example/sample1.uvcf example/sample2.uvcf example/comparison_result.txt
+
+	A file named comparison_result.txt will be produced that will contain the comparison result.
+
+-To get a filtered UVCF file after removing redundant indels, use the following command:
+	java GenerateFilteredUVCFFileAfterRemovingRedundantIndel UVCF_FILE REDUNDANT_INDEL_LIST
+	
+	example:
+		java GenerateFilteredUVCFFileAfterRemovingRedundantIndel example/out.uvcf example/redundant_indel_list.txt
+
+	A file named out_filtered.uvcf will be produced in the same directory as the input uvcf file (example/ in this case).
+
+## Citing UPS-indel
+	If you use UPS-indel, please cite the following paper:
+	Hasan, Mohammad Shabbir, Xiaowei Wu, Layne T. Watson, and Liqing Zhang. "UPS-indel: A Universal Positioning System For Indels." bioRxiv (2017): 133553.
