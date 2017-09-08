@@ -1,0 +1,3 @@
+Number of Common Indels in example/sample1.uvcf and example/sample2.uvcf : 106
+Number of Indels in example/sample1.uvcf but not in example/sample2.uvcf : 30
+Number of Indels in example/sample2.uvcf but not in example/sample1.uvcf : 20
